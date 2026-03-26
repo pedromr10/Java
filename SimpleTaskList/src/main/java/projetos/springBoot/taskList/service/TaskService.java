@@ -1,6 +1,7 @@
 package projetos.springBoot.taskList.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class TaskService {
 	}
 	
 	//retorna apenas a tarefa com determinado id:
-	public Task findById(Long id) {
-		return taskRepository.findById(id).orElseThrow();
+	public Optional<Task> findById(Long id) {
+		return taskRepository.findById(id);
 	}
 	
 	//insere uma task:
