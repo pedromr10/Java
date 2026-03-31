@@ -1,18 +1,20 @@
 package projetos.springBoot.taskList.exceptions;
 
+import java.util.List;
+
 public class ErrorResponse {
 
     private Long timestamp;
     private Integer status;
     private String error;
-    private String message;
+    private List<String> errors;
     private String path;
 
-    public ErrorResponse(Long timestamp, Integer status, String error, String message, String path) {
+    public ErrorResponse(Long timestamp, Integer status, String error, List<String> errors, String path) {
         this.timestamp = timestamp;
         this.status = status;
         this.error = error;
-        this.message = message;
+        this.errors = errors;
         this.path = path;
     }
 
@@ -28,8 +30,8 @@ public class ErrorResponse {
         return error;
     }
 
-    public String getMessage() {
-        return message;
+    public List<String> getErrors() {
+        return errors;
     }
 
     public String getPath() {

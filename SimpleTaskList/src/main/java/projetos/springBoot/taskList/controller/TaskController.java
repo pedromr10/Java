@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import projetos.springBoot.taskList.dto.TaskDTO;
 import projetos.springBoot.taskList.entities.Task;
 import projetos.springBoot.taskList.exceptions.ResourceNotFoundException;
@@ -44,22 +45,25 @@ public class TaskController {
 	
 	//obs: requesbody pega o json da requisicao e transforma em objeto task
 	@PostMapping 
-	public ResponseEntity<Task> insert(@RequestBody Task task) { 
+	public ResponseEntity<TaskDTO> insert(@RequestBody @Valid TaskDTO dto) { 
+		Task task = new Task(null, dto.getTitulo(), dto.getDescricao(), dto.getStatus());
 		Task saved =  taskService.insert(task); 
-		return ResponseEntity.status(200).body(saved);
+		TaskDTO responseDTO = new TaskDTO(saved);
+		return ResponseEntity.status(201).body(responseDTO);
 	}
 	
-	@DeleteMapping("{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
-		taskService.delete(id);
-		return ResponseEntity.noContent().build();
+	    taskService.delete(id);
+	    return ResponseEntity.noContent().build();
 	}
 	
 	//obs: pega o id da tarefa e o json atualizado
 	@PutMapping("{id}")
-	public ResponseEntity<Task> update(@PathVariable Long id, @RequestBody Task task) {
-		Task updated = taskService.update(id, task);
-		return ResponseEntity.ok(updated);
+	public ResponseEntity<TaskDTO> update(@PathVariable Long id, @RequestBody @Valid TaskDTO dto) {
+		Task updated = taskService.update(id, dto);
+		TaskDTO responseDTO = new TaskDTO(updated);
+		return ResponseEntity.ok(responseDTO);
 	}
 	
 }

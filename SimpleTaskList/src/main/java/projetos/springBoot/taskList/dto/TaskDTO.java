@@ -1,12 +1,17 @@
 package projetos.springBoot.taskList.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import projetos.springBoot.taskList.entities.Task;
 import projetos.springBoot.taskList.entities.enums.StatusTarefa;
 
 public class TaskDTO {
 	private Long id;
+	@NotBlank(message = "Titulo obrigatorio")
 	private String titulo;
+	@NotBlank(message = "Descricao obrigatoria")
 	private String descricao;
+	@NotNull(message = "Status obrigatorio")
 	private StatusTarefa status;
 	
 	public TaskDTO() {}
