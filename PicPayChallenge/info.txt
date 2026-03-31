@@ -4,4 +4,4 @@ Linguagem utilizada: Java
 Versão: 17
 
 Framework utilizado: Spring Boot
-Dependências:
+Dependências: Spring Web, Spring Data JPA, Spring Boot DevTools, H2 Database, Lombok, Validation 
