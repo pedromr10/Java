@@ -1,0 +1,7 @@
+Link para o desafio: https://github.com/PicPay/picpay-desafio-backend
+
+Linguagem utilizada: Java
+Versão: 17
+
+Framework utilizado: Spring Boot
+Dependências:
