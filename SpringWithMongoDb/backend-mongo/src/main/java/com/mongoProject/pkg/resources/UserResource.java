@@ -1,19 +1,23 @@
 package com.mongoProject.pkg.resources;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.mongoProject.pkg.domain.User;
 import com.mongoProject.pkg.dto.UserDTO;
 import com.mongoProject.pkg.services.UserService;
 
-@RestController
+@RestController //resource ou controller - recebe requisicoes
 @RequestMapping(value = "/users")
 public class UserResource {
 	
@@ -34,6 +38,20 @@ public class UserResource {
 		User user = userService.findById(id); 
 		UserDTO userDto = new UserDTO(user);
 		return ResponseEntity.ok().body(userDto);
+	}
+	
+	//insere um usuario:
+	@PostMapping
+	public ResponseEntity<UserDTO> insert(@RequestBody UserDTO userDTO){
+		User user = userService.fromDTO(userDTO); //transforma dto em user
+		User savedUser = userService.insert(user); //insere o user
+		UserDTO responseDtoUser = new UserDTO(savedUser); //cria um novo dto
+	    URI uri = ServletUriComponentsBuilder
+	            .fromCurrentRequest()
+	            .path("/{id}")
+	            .buildAndExpand(savedUser.getId())
+	            .toUri(); //cria o path do usuario adicionado
+		return ResponseEntity.created(uri).body(responseDtoUser);
 	}
 	
 }
