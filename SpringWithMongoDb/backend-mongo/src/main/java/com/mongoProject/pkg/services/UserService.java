@@ -34,8 +34,16 @@ public class UserService {
 		return userRepository.insert(user);
 	}
 	
+	//deleta um usuario:
+	public void delete(String id) {
+		findById(id); //precaucao caso o usuario nao exista
+		userRepository.deleteById(id);
+	}
+	
+	//transforma userDto para user
 	public User fromDTO(UserDTO userDto) {
 		return new User(userDto.getId(), userDto.getName(), userDto.getEmail());
 	}
+
 	
 }
