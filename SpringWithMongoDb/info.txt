@@ -1,0 +1,10 @@
+Linguagem utilizada: Java
+Versão: 17
+
+Framework utilizado: Spring Boot
+Dependências: Spring Web, Spring Data MongoDB
+
+Como inicializar o MongoDb para testes:
+1. Encontrar o arquivo de execução do Mongo ("ongod.exe");
+2. Pelo cmd, acessar a pasta onde se localiza o mongod.exe;
+3. Digitar "mongod" para inicializar.
