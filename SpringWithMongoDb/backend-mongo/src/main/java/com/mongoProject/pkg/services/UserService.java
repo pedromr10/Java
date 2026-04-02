@@ -40,10 +40,22 @@ public class UserService {
 		userRepository.deleteById(id);
 	}
 	
+	//atualiza um usuario:
+	public User update(User user) {
+		User newUser = userRepository.findById(user.getId()).orElseThrow(()-> new ObjectNotFoundException("Objeto nao encontrado."));
+		updateData(newUser, user);
+		return userRepository.save(newUser);
+	}
+	
 	//transforma userDto para user
 	public User fromDTO(UserDTO userDto) {
 		return new User(userDto.getId(), userDto.getName(), userDto.getEmail());
 	}
-
+	
+	//atualiza as informacoes do usuario
+	public void updateData(User newUser, User user) {
+		newUser.setName(user.getName());
+		newUser.setEmail(user.getEmail());
+	}
 	
 }
