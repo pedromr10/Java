@@ -34,6 +34,7 @@ public class PostResource {
 		text = URL.decodeParam(text);
 		List<Post> list = postService.findByTitle(text);
 		return ResponseEntity.ok().body(list);
+		//para testar: http://localhost:8080/posts/titlesearch?text=bom%20dia
 	}
 	
 }
