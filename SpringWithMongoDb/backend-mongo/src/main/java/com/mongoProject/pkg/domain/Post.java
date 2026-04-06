@@ -87,6 +87,10 @@ public class Post implements Serializable{
 		Post other = (Post) obj;
 		return Objects.equals(id, other.id);
 	}
+
 	
 	
 }
+
+//obs: o @dbref é utilizado quando um atributo esta referenciando outra colecao do moongodb
+//o lazy = true garante que os posts so serao carregados se carregarmos, ou seja, em uma busca so serao carregados os dados do usuario
