@@ -19,6 +19,8 @@ public class TransferService {
 	private TransactionRepository transactionRepository;
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private AuthorizationService authorizationService;
 	
 	@Transactional
 	public void transfer(Long payerId, Long payeeId, BigDecimal value) {
@@ -35,10 +37,10 @@ public class TransferService {
 		if(payer.getBalance().compareTo(value) < 0) {
 			throw new RuntimeException("Insufficient balance");
 		}
-		//verifica se foi autorizado (dado mockado ainda):
-		if(!authorizeTransaction()) {
-			throw new RuntimeException("Transaction not authorized");
-		}
+		//verifica se foi autorizado:
+	    if(!authorizationService.authorize()) {
+	        throw new RuntimeException("Transaction not authorized");
+	    }
 		
 		//caso nenhuma excecao ocorra, acontece a transferencia:
 		payer.setBalance(payer.getBalance().subtract(value));
