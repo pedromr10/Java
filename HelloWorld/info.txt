@@ -1,0 +1,5 @@
+Linguagem utilizada: Java
+Versão: 17
+
+Framework utilizado: Spring Boot
+Dependências: Spring Web, Spring Boot DevTools, Lombok
