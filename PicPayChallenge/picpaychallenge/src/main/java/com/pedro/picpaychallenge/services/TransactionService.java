@@ -1,10 +1,17 @@
 package com.pedro.picpaychallenge.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import java.time.LocalDateTime;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.pedro.picpaychallenge.domain.Transaction;
+import com.pedro.picpaychallenge.domain.User;
+import com.pedro.picpaychallenge.dtos.TransactionDTO;
 import com.pedro.picpaychallenge.repositories.TransactionRepo;
-import com.pedro.picpaychallenge.repositories.UserRepo;
 
 @Service
 public class TransactionService {
@@ -13,5 +20,38 @@ public class TransactionService {
 	private UserService userService;
 	@Autowired
 	private TransactionRepo transactionRepo;
-	// 36min
+	@Autowired
+	private RestTemplate restTemplate;
+	
+	public void createTransaction(TransactionDTO transactionDTO) throws Exception{
+		User payer = userService.findUserById(transactionDTO.payerId());
+		User payee = userService.findUserById(transactionDTO.payeeId());
+		userService.validateTransaction(payer, transactionDTO.amount());
+		
+		if(!isTransactionAuthorized()) {
+			throw new Exception("Transaction not authorized");
+		}
+		
+		Transaction transaction = new Transaction(null, payer, payee, transactionDTO.amount(), LocalDateTime.now());
+		
+		transactionRepo.save(transaction); //47 min
+	}
+	
+	public boolean isTransactionAuthorized() {
+		
+		String url = "https://util.devi.tools/api/v2/authorize";
+		ResponseEntity<Map> response = restTemplate.getForEntity(url, Map.class);
+		
+		String responseStatus = (String) response.getBody().get("status");
+		Map<String, Object> data = (Map<String, Object>) response.getBody().get("data");
+		Boolean responseAuthorization = (Boolean) data.get("authorization");
+		
+		if(responseStatus.equalsIgnoreCase("success") && Boolean.TRUE.equals(responseAuthorization)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+	}
 }
