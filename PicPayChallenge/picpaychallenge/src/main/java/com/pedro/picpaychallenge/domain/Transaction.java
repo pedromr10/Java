@@ -35,6 +35,6 @@ public class Transaction {
 	@ManyToOne
 	@JoinColumn(name = "payeeId")
 	private User payee;
-	private BigDecimal value;
+	private BigDecimal amount;
 	private LocalDateTime timestamp;
 }
