@@ -2,6 +2,7 @@ package com.pedro.picpaychallenge.domain;
 
 import java.math.BigDecimal;
 
+import com.pedro.picpaychallenge.dtos.UserDTO;
 import com.pedro.picpaychallenge.enums.UserType;
 
 import jakarta.persistence.Column;
@@ -40,5 +41,12 @@ public class User {
 	private UserType type;
 	private BigDecimal balance;
 	
-	
+	public User(UserDTO userDto) {
+		this.fullName = userDto.fullName();
+		this.cpf = userDto.cpf();
+		this.email = userDto.email();
+		this.password = userDto.password();
+		this.balance = userDto.balance();
+		this.type = userDto.type();
+	}
 }

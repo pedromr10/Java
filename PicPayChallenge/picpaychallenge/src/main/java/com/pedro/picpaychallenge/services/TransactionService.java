@@ -1,5 +1,6 @@
 package com.pedro.picpaychallenge.services;
 
+import com.pedro.picpaychallenge.repositories.UserRepo;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -16,14 +17,17 @@ import com.pedro.picpaychallenge.repositories.TransactionRepo;
 @Service
 public class TransactionService {
 	
+	
 	@Autowired
 	private UserService userService;
 	@Autowired
 	private TransactionRepo transactionRepo;
 	@Autowired
 	private RestTemplate restTemplate;
+	@Autowired
+	private NotificationService notificationService;
 	
-	public void createTransaction(TransactionDTO transactionDTO) throws Exception{
+	public Transaction createTransaction(TransactionDTO transactionDTO) throws Exception{
 		User payer = userService.findUserById(transactionDTO.payerId());
 		User payee = userService.findUserById(transactionDTO.payeeId());
 		userService.validateTransaction(payer, transactionDTO.amount());
@@ -32,9 +36,21 @@ public class TransactionService {
 			throw new Exception("Transaction not authorized");
 		}
 		
-		Transaction transaction = new Transaction(null, payer, payee, transactionDTO.amount(), LocalDateTime.now());
+		Transaction newTransaction = new Transaction(null, payer, payee, transactionDTO.amount(), LocalDateTime.now());
 		
-		transactionRepo.save(transaction); //47 min
+		transactionRepo.save(newTransaction);
+		
+		payer.setBalance(payer.getBalance().subtract(transactionDTO.amount()));
+		payee.setBalance(payee.getBalance().add(transactionDTO.amount()));
+		
+		transactionRepo.save(newTransaction);
+		userService.saveUser(payer);
+		userService.saveUser(payee);
+		
+		notificationService.sendNotification(payer, "Transaction paid");
+		notificationService.sendNotification(payee, "Transaction received");
+		
+		return newTransaction;
 	}
 	
 	public boolean isTransactionAuthorized() {
