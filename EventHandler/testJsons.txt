@@ -1,0 +1,20 @@
+{
+  "title": "Workshop de Java",
+  "description": "Evento presencial sobre Spring Boot",
+  "date": "2026-04-20T10:00:00",
+  "type": "IN_PERSON"
+}
+
+{
+  "title": "Live de Microservices",
+  "description": "Evento online sobre arquitetura distribuída",
+  "date": "2026-04-22T19:00:00",
+  "type": "REMOTE"
+}
+
+{
+  "title": "Hackathon Dev",
+  "description": "Competição de programação presencial",
+  "date": "2026-05-01T09:00:00",
+  "type": "IN_PERSON"
+}
