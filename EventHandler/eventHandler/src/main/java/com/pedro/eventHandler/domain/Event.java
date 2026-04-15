@@ -1,6 +1,7 @@
 package com.pedro.eventHandler.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import com.pedro.eventHandler.enums.EventType;
 
@@ -10,6 +11,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,4 +35,7 @@ public class Event {
 	private Date date;
 	@Enumerated(EnumType.STRING) 
 	private EventType type;
+	
+	@OneToMany(mappedBy = "event")
+	private List<Coupon> coupons;
 }
