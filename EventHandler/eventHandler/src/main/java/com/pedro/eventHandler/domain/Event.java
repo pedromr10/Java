@@ -1,5 +1,6 @@
 package com.pedro.eventHandler.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -37,5 +38,5 @@ public class Event {
 	private EventType type;
 	
 	@OneToMany(mappedBy = "event")
-	private List<Coupon> coupons;
+	private List<Coupon> coupons = new ArrayList<>();
 }

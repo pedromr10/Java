@@ -2,6 +2,8 @@ package com.pedro.eventHandler.domain;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,5 +34,6 @@ public class Coupon {
 	private String code;
 	@ManyToOne
 	@JoinColumn(name = "event_id")
+	@JsonIgnore
 	private Event event;
 }

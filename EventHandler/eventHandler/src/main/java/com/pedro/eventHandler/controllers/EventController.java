@@ -40,7 +40,7 @@ public class EventController {
 	//add event:
 	@PostMapping
 	public ResponseEntity<Event> addEvent(@RequestBody Event event){
-		Event newEvent = new Event(null, event.getTitle(), event.getDescription(), event.getDate(), event.getType());
+		Event newEvent = new Event(null, event.getTitle(), event.getDescription(), event.getDate(), event.getType(), event.getCoupons());
 		
 		Event savedEvent = eventService.addEvent(newEvent);
 		return ResponseEntity.status(201).body(savedEvent);
