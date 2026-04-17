@@ -1,4 +1,4 @@
-package com.pedro.librarySystem.Controllers;
+package com.pedro.librarySystem.controllers;
 
 import java.util.List;
 
@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pedro.librarySystem.entities.Book;
 import com.pedro.librarySystem.services.BookService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/books")
 public class BookController {
@@ -24,7 +26,7 @@ public class BookController {
 	
 	//add book:
 	@PostMapping
-	public ResponseEntity<Book> create(@RequestBody Book book){
+	public ResponseEntity<Book> create(@RequestBody @Valid Book book){
 		Book newBook = bookService.create(book);
 		return ResponseEntity.status(201).body(newBook);
 	}

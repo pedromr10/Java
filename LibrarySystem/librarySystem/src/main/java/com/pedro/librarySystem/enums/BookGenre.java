@@ -6,5 +6,6 @@ public enum BookGenre {
 	HISTORY,
 	BIOGRAPHY,
 	RELIGION,
-	FANTASY
+	FANTASY,
+	DYSTOPIA
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pedro.librarySystem.dtos.BookDTO;
 import com.pedro.librarySystem.entities.Book;
 import com.pedro.librarySystem.repositories.BookRepository;
 
@@ -15,7 +16,14 @@ public class BookService {
 	private BookRepository bookRepo;
 	
 	//add book:
-	public Book create(Book book) {
+	public Book create(BookDTO bookDto) {
+		Book book = new Book();
+		book.setTitle(bookDto.getTitle());
+		book.setAuthor(bookDto.getAuthor());
+		book.setReleaseDate(bookDto.getReleaseDate());
+		book.setSynopsis(bookDto.getSynopsis());
+		book.setAvailableQuantity(bookDto.getAvailableQuantity());
+		book.setGenre(bookDto.getGenre());
 		return bookRepo.save(book);
 	}
 	
