@@ -21,6 +21,7 @@ public class UserService {
 	
 	//add user:
 	public UserResponseDTO create(UserRequestDTO userRequest) {
+		//email validation
 		if (userRepo.existsByEmail(userRequest.getEmail())) {
 		    throw new RuntimeException("Email already in use");
 		}
