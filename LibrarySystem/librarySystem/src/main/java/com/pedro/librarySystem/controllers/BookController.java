@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pedro.librarySystem.entities.Book;
+import com.pedro.librarySystem.dtos.BookRequestDTO;
+import com.pedro.librarySystem.dtos.BookResponseDTO;
 import com.pedro.librarySystem.services.BookService;
 
 import jakarta.validation.Valid;
@@ -23,26 +24,27 @@ public class BookController {
 
 	@Autowired
 	private BookService bookService;
-	
+
 	//add book:
 	@PostMapping
-	public ResponseEntity<Book> create(@RequestBody @Valid Book book){
-		Book newBook = bookService.create(book);
-		return ResponseEntity.status(201).body(newBook);
+	public ResponseEntity<BookResponseDTO> create(@RequestBody @Valid BookRequestDTO bookDto){
+		
+		BookResponseDTO savedDto = bookService.create(bookDto);
+		return ResponseEntity.status(201).body(savedDto);
 	}
 	
 	//find all books:
 	@GetMapping
-	public ResponseEntity<List<Book>> findAll(){
-		List<Book> allBooksList = bookService.findAll();
+	public ResponseEntity<List<BookResponseDTO>> findAll(){
+		List<BookResponseDTO> allBooksList = bookService.findAll();
 		return ResponseEntity.status(200).body(allBooksList);
 	}
 	
 	//find book by id
 	@GetMapping("/{id}")
-	public ResponseEntity<Book> findById(@PathVariable Long id){
-		Book book = bookService.findById(id);
-		return ResponseEntity.status(200).body(book);
+	public ResponseEntity<BookResponseDTO> findById(@PathVariable Long id){
+		BookResponseDTO bookDto = bookService.findById(id);
+		return ResponseEntity.status(200).body(bookDto);
 	} 
 	
 	//delete book:
