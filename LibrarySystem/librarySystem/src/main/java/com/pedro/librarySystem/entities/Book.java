@@ -12,8 +12,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -32,11 +30,14 @@ public class Book {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(nullable = false)
 	private String title;
+	@Column(nullable = false)
 	private String author;
 	private LocalDate releaseDate;
 	@Column(columnDefinition = "TEXT")
 	private String synopsis;
+	@Column(nullable = false)
 	private Integer availableQuantity;
 	@Enumerated(EnumType.STRING)
 	private BookGenre genre;

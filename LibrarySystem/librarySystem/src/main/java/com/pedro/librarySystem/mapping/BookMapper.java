@@ -9,14 +9,14 @@ import com.pedro.librarySystem.entities.Book;
 @Component
 public class BookMapper {
 	
-	public Book toEntity(BookRequestDTO bookDTO) {
+	public Book toEntity(BookRequestDTO bookDto) {
 		Book book = new Book();
-		book.setTitle(bookDTO.getTitle());
-		book.setAuthor(bookDTO.getAuthor());
-		book.setReleaseDate(bookDTO.getReleaseDate());
-		book.setSynopsis(bookDTO.getSynopsis());
-		book.setAvailableQuantity(bookDTO.getAvailableQuantity());
-		book.setGenre(bookDTO.getGenre());
+		book.setTitle(bookDto.getTitle());
+		book.setAuthor(bookDto.getAuthor());
+		book.setReleaseDate(bookDto.getReleaseDate());
+		book.setSynopsis(bookDto.getSynopsis());
+		book.setAvailableQuantity(bookDto.getAvailableQuantity());
+		book.setGenre(bookDto.getGenre());
 		return book;
 	}
 	
