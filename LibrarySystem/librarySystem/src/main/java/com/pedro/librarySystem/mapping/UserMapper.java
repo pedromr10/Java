@@ -18,11 +18,11 @@ public class UserMapper {
 	}
 	
 	public UserResponseDTO toResponseDTO(User user) {
-		UserResponseDTO userDto = new UserResponseDTO();
-		userDto.setId(user.getId());
-		userDto.setFullName(user.getFullName());
-		userDto.setEmail(user.getEmail());
-		userDto.setRole(user.getRole());
-		return userDto;
+		UserResponseDTO userResponse = new UserResponseDTO();
+		userResponse.setId(user.getId());
+		userResponse.setFullName(user.getFullName());
+		userResponse.setEmail(user.getEmail());
+		userResponse.setRole(user.getRole());
+		return userResponse;
 	}
 }

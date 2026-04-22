@@ -21,14 +21,14 @@ public class BookMapper {
 	}
 	
     public BookResponseDTO toResponseDTO(Book book) {
-        BookResponseDTO bookDto = new BookResponseDTO();
-        bookDto.setId(book.getId());
-        bookDto.setTitle(book.getTitle());
-        bookDto.setAuthor(book.getAuthor());
-        bookDto.setReleaseDate(book.getReleaseDate());
-        bookDto.setSynopsis(book.getSynopsis());
-        bookDto.setAvailableQuantity(book.getAvailableQuantity());
-        bookDto.setGenre(book.getGenre());
-        return bookDto;
+        BookResponseDTO bookResponse = new BookResponseDTO();
+        bookResponse.setId(book.getId());
+        bookResponse.setTitle(book.getTitle());
+        bookResponse.setAuthor(book.getAuthor());
+        bookResponse.setReleaseDate(book.getReleaseDate());
+        bookResponse.setSynopsis(book.getSynopsis());
+        bookResponse.setAvailableQuantity(book.getAvailableQuantity());
+        bookResponse.setGenre(book.getGenre());
+        return bookResponse;
     }
 }
