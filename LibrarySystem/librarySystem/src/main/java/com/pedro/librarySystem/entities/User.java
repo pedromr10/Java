@@ -1,8 +1,6 @@
 package com.pedro.librarySystem.entities;
 
-import java.time.LocalDate;
-
-import com.pedro.librarySystem.enums.BookGenre;
+import com.pedro.librarySystem.enums.UserRole;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,8 +10,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,18 +25,16 @@ import lombok.Setter;
 @EqualsAndHashCode(of = "id")
 
 @Entity
-@Table(name = "tb_book")
-public class Book {
+@Table(name = "tb_user")
+public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String title;
-	private String author;
-	private LocalDate releaseDate;
-	@Column(columnDefinition = "TEXT")
-	private String synopsis;
-	private Integer availableQuantity;
+	private String fullName;
+	@Email
+	@Column(unique = true, nullable = false)
+	private String email;
 	@Enumerated(EnumType.STRING)
-	private BookGenre genre;
+	private UserRole role;
 	
 }
