@@ -13,13 +13,13 @@ import lombok.Setter;
 @Setter
 
 public class BookRequestDTO {
-	@NotBlank
+	@NotBlank(message = "{NotBlank.book.title}")
 	private String title;
-	@NotBlank
+	@NotBlank(message = "{NotBlank.book.author}")
 	private String author;
 	private LocalDate releaseDate;
 	private String synopsis;
-	@NotNull
+	@NotNull(message = "{NotNull.book.availableQuantity}")
 	private Integer availableQuantity;
 	private BookGenre genre;
 }
