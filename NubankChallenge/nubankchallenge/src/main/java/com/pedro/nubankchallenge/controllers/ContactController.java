@@ -34,7 +34,6 @@ public class ContactController {
 	public ResponseEntity<List<ContactResponseDto>> listContacts(@PathVariable Long clientId){
 		return ResponseEntity.status(200).body(contactService.listContacts(clientId));
 	}
-	// * * * ** * clients nao mostram seus contatos - BUG
 }
 
 
