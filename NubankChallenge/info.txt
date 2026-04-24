@@ -1,0 +1,7 @@
+Link para o desafio: https://www.youtube.com/watch?v=Q2WzZVr8rqg
+
+Linguagem utilizada: Java
+Versão: 17
+
+Framework utilizado: Spring Boot (3.5.14)
+Dependências: Spring Web, Spring Data JPA, Validation, Spring Boot DevTools, H2 Database, Lombok, PostgreSQL driver
