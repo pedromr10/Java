@@ -1,5 +1,6 @@
 package com.pedro.nubankchallenge.mappers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.pedro.nubankchallenge.dtos.requests.ClientRequestDto;
@@ -8,6 +9,9 @@ import com.pedro.nubankchallenge.entities.Client;
 
 @Component
 public class ClientMapping {
+	
+	@Autowired
+	private ContactMapping contactcMapper;
 	
 	public Client toEntity(ClientRequestDto clientRequest) {
 		Client client = new Client();
@@ -21,6 +25,7 @@ public class ClientMapping {
 		clientResponse.setId(client.getId());
 		clientResponse.setName(client.getName());
 		clientResponse.setAge(client.getAge());
+		clientResponse.setContacts(client.getContacts().stream().map(contactcMapper::toResponse).toList());
 		return clientResponse;
 	}
 }
