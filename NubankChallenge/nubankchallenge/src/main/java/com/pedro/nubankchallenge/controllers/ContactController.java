@@ -15,6 +15,8 @@ import com.pedro.nubankchallenge.dtos.requests.ContactRequestDto;
 import com.pedro.nubankchallenge.dtos.responses.ContactResponseDto;
 import com.pedro.nubankchallenge.services.ContactService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/contacts")
 public class ContactController {
@@ -24,7 +26,7 @@ public class ContactController {
 	
 	//cadastro de contato:
 	@PostMapping("/{clientId}")
-	public ResponseEntity<ContactResponseDto> addContact(@RequestBody ContactRequestDto contactRequest, @PathVariable Long clientId){
+	public ResponseEntity<ContactResponseDto> addContact(@RequestBody @Valid ContactRequestDto contactRequest, @PathVariable Long clientId){
 		ContactResponseDto contactResponse = contactService.addContact(contactRequest, clientId); 
 		return ResponseEntity.status(201).body(contactResponse);
 	}

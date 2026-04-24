@@ -14,6 +14,8 @@ import com.pedro.nubankchallenge.dtos.requests.ClientRequestDto;
 import com.pedro.nubankchallenge.dtos.responses.ClientResponseDto;
 import com.pedro.nubankchallenge.services.ClientService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/clients")
 public class ClientController {
@@ -23,7 +25,7 @@ public class ClientController {
 	
 	//cadastro de cliente:
 	@PostMapping
-	public ResponseEntity<ClientResponseDto> addClient(@RequestBody ClientRequestDto clientRequest){
+	public ResponseEntity<ClientResponseDto> addClient(@RequestBody @Valid ClientRequestDto clientRequest){
 		ClientResponseDto clientResponse = clientService.addClient(clientRequest);
 		return ResponseEntity.status(201).body(clientResponse);
 	}

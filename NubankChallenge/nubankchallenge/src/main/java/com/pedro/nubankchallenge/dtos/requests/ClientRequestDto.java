@@ -9,9 +9,8 @@ import lombok.Setter;
 @Setter
 
 public class ClientRequestDto {
-	//tratar mensagens de erro ///**/*/*/*/*******
-	@NotBlank
+	@NotBlank(message = "{NotBlank.client.name}")
 	private String name;
-	@NotNull
+	@NotNull(message = "{NotNull.client.age}")
 	private Integer age;
 }

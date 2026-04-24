@@ -8,8 +8,8 @@ import lombok.Setter;
 @Setter
 
 public class ContactRequestDto {
-	@NotBlank //tratar mensagens de erro ///**/*/*/*/*******
+	@NotBlank(message = "{NotBlank.contact.email}")
 	private String email;
-	@NotBlank
+	@NotBlank(message = "{NotBlank.contact.phoneNumber}")
 	private String phoneNumber;
 }
