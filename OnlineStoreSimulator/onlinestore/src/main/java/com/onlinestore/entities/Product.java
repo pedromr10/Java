@@ -34,7 +34,9 @@ public class Product {
 	@NotBlank
 	private String description;
 	@Positive
+	@NotNull
 	private BigDecimal price;
 	@PositiveOrZero
+	@NotNull
 	private Integer stock;
 }
