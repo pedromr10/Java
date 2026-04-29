@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.onlinestore.dtos.ProductRequestDto;
 import com.onlinestore.dtos.ProductResponseDto;
 import com.onlinestore.entities.Product;
+import com.onlinestore.exceptions.ProductNotFoundException;
 import com.onlinestore.mappers.ProductMapper;
 import com.onlinestore.repositories.ProductRepository;
 
@@ -40,13 +41,13 @@ public class ProductService {
 	
 	//search product by id:
 	public ProductResponseDto findById(Long id) {
-		Product product = productRepo.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
+		Product product = productRepo.findById(id).orElseThrow(() -> new ProductNotFoundException("Product not found"));
 		return mapper.toResponse(product);
 	}
 	
 	//update product:
 	public ProductResponseDto updateProduct(Long id, ProductRequestDto request) {
-		Product product = productRepo.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
+		Product product = productRepo.findById(id).orElseThrow(() -> new ProductNotFoundException("Product not found"));
 		product.setName(request.getName());
 		product.setDescription(request.getDescription());
 		product.setPrice(request.getPrice());
@@ -58,7 +59,7 @@ public class ProductService {
 	
 	//delete product:
 	public void deleteProduct(Long id) {
-		Product product = productRepo.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
+		Product product = productRepo.findById(id).orElseThrow(() -> new ProductNotFoundException("Product not found"));
 		productRepo.delete(product);
 	}
 	
