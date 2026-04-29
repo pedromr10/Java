@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.onlinestore.entities.Product;
+import com.onlinestore.dtos.ProductRequestDto;
+import com.onlinestore.dtos.ProductResponseDto;
+import com.onlinestore.mappers.ProductMapper;
 import com.onlinestore.services.ProductService;
 
 import jakarta.validation.Valid;
@@ -21,16 +23,18 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private ProductMapper mapper;
 	
 	//insert product:
 	@PostMapping
-	public ResponseEntity<Product> createProduct(@RequestBody @Valid Product product){
-		return ResponseEntity.status(201).body(productService.createProduct(product));
+	public ResponseEntity<ProductResponseDto> createProduct(@RequestBody @Valid ProductRequestDto request){
+		return ResponseEntity.status(201).body(productService.createProduct(mapper.toEntity(request)));
 	}
 	
 	//list all products:
 	@GetMapping
-	public ResponseEntity<List<Product>> listAllProducts(){
+	public ResponseEntity<List<ProductResponseDto>> listAllProducts(){
 		return ResponseEntity.status(200).body(productService.listAllProducts());
 	}
 	
