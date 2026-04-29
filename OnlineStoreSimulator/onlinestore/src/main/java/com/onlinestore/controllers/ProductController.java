@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,10 +31,23 @@ public class ProductController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(productService.createProduct(request));
 	}
 	
+	//insert list of products:
+	@PostMapping("/batch")
+	public ResponseEntity<List<ProductResponseDto>> createProductBatch(@RequestBody @Valid List<ProductRequestDto> requestList){
+		return ResponseEntity.status(HttpStatus.CREATED).body(productService.createProductBatch(requestList));
+	}
+
+	
 	//list all products:
 	@GetMapping
 	public ResponseEntity<List<ProductResponseDto>> listAllProducts(){
 		return ResponseEntity.status(HttpStatus.OK).body(productService.listAllProducts());
+	}
+	
+	//search product by id:
+	@GetMapping("/{id}")
+	public ResponseEntity<ProductResponseDto> findById(@PathVariable Long id){
+		return ResponseEntity.status(HttpStatus.OK).body(productService.findById(id));
 	}
 	
 }
