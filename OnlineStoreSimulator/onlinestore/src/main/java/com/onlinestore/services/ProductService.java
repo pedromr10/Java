@@ -44,7 +44,23 @@ public class ProductService {
 		return mapper.toResponse(product);
 	}
 	
+	//update product:
+	public ProductResponseDto updateProduct(Long id, ProductRequestDto request) {
+		Product product = productRepo.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
+		product.setName(request.getName());
+		product.setDescription(request.getDescription());
+		product.setPrice(request.getPrice());
+		product.setStock(request.getStock());
+		productRepo.save(product);
+		
+		return mapper.toResponse(product);
+	}
 	
+	//delete product:
+	public void deleteProduct(Long id) {
+		Product product = productRepo.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
+		productRepo.delete(product);
+	}
 	
 	
 	
