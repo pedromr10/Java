@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.onlinestore.dtos.ProductRequestDto;
 import com.onlinestore.dtos.ProductResponseDto;
 import com.onlinestore.entities.Product;
 import com.onlinestore.mappers.ProductMapper;
@@ -20,8 +21,8 @@ public class ProductService {
 	private ProductMapper mapper;
 	
 	//insert product:
-	public ProductResponseDto createProduct(Product product) {
-		Product newProduct = productRepo.save(product);
+	public ProductResponseDto createProduct(ProductRequestDto request) {
+		Product newProduct = productRepo.save(mapper.toEntity(request));
 		return mapper.toResponse(newProduct);
 	}
 	
