@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.onlinestore.dtos.ProductRequestDto;
 import com.onlinestore.dtos.ProductResponseDto;
 import com.onlinestore.entities.Product;
+import com.onlinestore.exceptions.ProductAlreadyExistsException;
 import com.onlinestore.exceptions.ProductNotFoundException;
 import com.onlinestore.mappers.ProductMapper;
 import com.onlinestore.repositories.ProductRepository;
@@ -23,6 +24,9 @@ public class ProductService {
 	
 	//insert product:
 	public ProductResponseDto createProduct(ProductRequestDto request) {
+		if (productRepo.findByName(request.getName()).isPresent()) {
+		    throw new ProductAlreadyExistsException("Product already exists");
+		}
 		Product newProduct = productRepo.save(mapper.toEntity(request));
 		return mapper.toResponse(newProduct);
 	}
@@ -62,6 +66,8 @@ public class ProductService {
 		Product product = productRepo.findById(id).orElseThrow(() -> new ProductNotFoundException("Product not found. Cannot delete"));
 		productRepo.delete(product);
 	}
+	
+	
 	
 	
 	
