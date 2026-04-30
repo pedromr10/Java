@@ -47,7 +47,7 @@ public class ProductService {
 	
 	//update product:
 	public ProductResponseDto updateProduct(Long id, ProductRequestDto request) {
-		Product product = productRepo.findById(id).orElseThrow(() -> new ProductNotFoundException("Product not found"));
+		Product product = productRepo.findById(id).orElseThrow(() -> new ProductNotFoundException("Product not found. Cannot update"));
 		product.setName(request.getName());
 		product.setDescription(request.getDescription());
 		product.setPrice(request.getPrice());
@@ -59,7 +59,7 @@ public class ProductService {
 	
 	//delete product:
 	public void deleteProduct(Long id) {
-		Product product = productRepo.findById(id).orElseThrow(() -> new ProductNotFoundException("Product not found"));
+		Product product = productRepo.findById(id).orElseThrow(() -> new ProductNotFoundException("Product not found. Cannot delete"));
 		productRepo.delete(product);
 	}
 	
