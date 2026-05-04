@@ -11,10 +11,6 @@ public class OpenApiConfig {
 
     @Bean
     public OpenAPI customOpenAPI() {
-        return new OpenAPI()
-                .info(new Info()
-                        .title("Online Store API")
-                        .version("v1")
-                        .description("REST API for managing products and shopping cart"));
+        return new OpenAPI().info(new Info().title("Online Store API").version("v1").description("REST API for managing products and shopping cart"));
     }
 }
