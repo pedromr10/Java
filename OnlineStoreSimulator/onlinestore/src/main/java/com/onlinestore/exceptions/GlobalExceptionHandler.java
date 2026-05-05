@@ -27,6 +27,20 @@ public class GlobalExceptionHandler {
 		
 	}
 	
+	
+	//cart not found:
+	@ExceptionHandler(CartNotFoundException.class )
+	public ResponseEntity<ErrorResponse> handleCartNotFound(CartNotFoundException e, HttpServletRequest request){
+		ErrorResponse error = new ErrorResponse();
+		error.setTimestamp(LocalDateTime.now());
+		error.setStatus(HttpStatus.NOT_FOUND.value());
+		error.setPath(request.getRequestURI());
+		error.setMessages(List.of(e.getMessage()));
+		
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+		
+	}
+	
 	//@valid validation:
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ErrorResponse> handleArgumentNotValid(MethodArgumentNotValidException e, HttpServletRequest request) {
