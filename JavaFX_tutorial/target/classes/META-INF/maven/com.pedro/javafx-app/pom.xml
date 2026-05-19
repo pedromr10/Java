@@ -40,7 +40,7 @@
                 <version>0.0.8</version>
 
                 <configuration>
-                    <mainClass>com.javafx.JavaFXGridPanes</mainClass>
+                    <mainClass>com.javafx.JavaFXList</mainClass>
                 </configuration>
             </plugin>
 
