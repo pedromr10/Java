@@ -1,4 +1,4 @@
-* To run:
+* Como rodar o projeto (Eclipse STS):
 	1- Rodar a classe com Maven build;
 	2- Em goal, adicionar "javafx:run";
 	3- Aplicar e clicar em run.
