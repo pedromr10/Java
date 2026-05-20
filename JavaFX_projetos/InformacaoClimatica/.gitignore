@@ -1,2 +1,8 @@
-src/main/resources/api/api-key.txt
 target/
+.idea/
+.classpath
+.project
+.settings/
+*.log
+
+src/main/resources/api/api-key.txt
