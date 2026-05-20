@@ -1,6 +1,7 @@
 package com.javafx;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,6 +22,7 @@ public class GeradorDeSenhasGUI extends Application{
 		Label labelSenhaGerada = new Label("Senha gerada: ");
 		TextField campoSenhaGerada = new TextField();
 		campoSenhaGerada.setEditable(false);
+		campoSenhaGerada.setStyle("-fx-text-fill: cyan; -fx-background-color: black;");
 		
 		Button botaoGerar = new Button("Gerar senha");
 		botaoGerar.setOnAction(e->{
@@ -28,8 +30,12 @@ public class GeradorDeSenhasGUI extends Application{
 			String senha = SenhaSegura.gerarSenha(tamanhoSenha);
 			campoSenhaGerada.setText(senha);
 		});
+		
 		VBox vBox = new VBox(labelTamanho, campoTamanho, botaoGerar, labelSenhaGerada, campoSenhaGerada);
-		Scene cena = new Scene(vBox, 250, 200);
+		vBox.setSpacing(10);
+		vBox.setPadding(new Insets(10));
+		
+		Scene cena = new Scene(vBox, 300, 200);
 		palco.setScene(cena);
 		palco.show();
 	}
